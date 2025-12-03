@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Marcelo Gonçalves Cardozo — Estudante de Engenharia de Software</title>
+  <meta name="description" content="Curriculum de Marcelo Gonçalves Cardozo - Estudante de Engenharia de Software. HTML, CSS básico, JavaScript. Buscando primeira oportunidade." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --primary:#2563eb;
+      --secondary:#1e40af;
+      --muted:#6b7280;
+      --bg:#f7fafc;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.6);
+      --radius-lg: 14px;
+      --shadow-1: 0 6px 18px rgba(16,24,40,0.06);
+      --shadow-2: 0 10px 30px rgba(2,6,23,0.08);
+      --max-width: 1100px;
+    }
+
+    /* Reset básico */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Container */
+    .container{
+      width:calc(100% - 32px);
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    /* Header / Nav */
+    header{
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:60;
+      box-shadow:var(--shadow-1);
+      border-bottom:1px solid rgba(15,23,42,0.03);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+    .brand{
+      font-weight:800;
+      color:var(--primary);
+      letter-spacing:-0.02em;
+      font-size:20px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:20px;
+      align-items:center;
+    }
+    .nav-links a{
+      color:var(--muted);
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:8px;
+      transition:all .18s ease;
+    }
+    .nav-links a:hover{ color:var(--primary); background: rgba(37,99,235,0.06); }
+
+    /* Mobile button */
+    .mobile-btn{
+      display:none;
+      background:transparent;
+      border:0;
+      font-size:20px;
+    }
+
+    /* Hero */
+    .hero{
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      color:#fff;
+      padding:56px 0;
+      text-align:center;
+    }
+    .hero h1{ font-size:clamp(28px,5vw,48px); margin-bottom:10px; font-weight:800; }
+    .hero p{ font-size:clamp(14px,2.2vw,20px); opacity:0.95; margin-bottom:18px; font-weight:500; }
+    .hero .cta{ display:inline-flex; gap:12px; margin-top:6px; flex-wrap:wrap; justify-content:center; }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 18px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:var(--shadow-2);
+      transition:transform .18s ease, background .18s ease, color .18s ease;
+    }
+    .btn-primary{ background:#fff; color:var(--primary); }
+    .btn-outline{ background:transparent; color:#fff; border:2px solid rgba(255,255,255,0.18); }
+
+    .btn:hover{ transform:translateY(-4px); }
+
+    /* Sections */
+    section{ padding:56px 0; }
+    h2.section-title{
+      font-size:26px; text-align:center; margin-bottom:18px; font-weight:800; color:#0f172a;
+    }
+    .section-sub{ text-align:center; color:var(--muted); margin-bottom:26px; }
+
+    /* Sobre */
+    .about{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:22px;
+      align-items:center;
+    }
+    .profile-photo{
+      width:180px; height:180px; border-radius:999px; overflow:hidden; border:6px solid rgba(37,99,235,0.14); box-shadow:var(--shadow-1);
+      margin:0 auto;
+    }
+    .about .card{
+      background:var(--card); padding:20px; border-radius:12px; box-shadow:var(--shadow-1);
+    }
+
+    /* Skills grid */
+    .cards{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+    .skill{
+      background:var(--card); padding:18px; border-radius:12px; box-shadow:var(--shadow-1);
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .skill i{ font-size:28px; color:var(--primary); margin-top:2px; width:38px; text-align:center }
+    .skill h4{ font-size:16px; margin-bottom:6px; font-weight:700; color:#0f172a }
+    .skill p{ color:var(--muted); font-size:14px }
+
+    /* Cards columns on larger */
+    @media(min-width:720px){
+      .about{ grid-template-columns:220px 1fr; }
+      .cards{ grid-template-columns:repeat(3,1fr); }
+      .nav-links{ display:flex; }
+      .mobile-btn{ display:none; }
+    }
+
+    /* Projects / Formation / Contact layout */
+    .formation-card{
+      background:linear-gradient(180deg,#fff,#fbfdff); padding:22px; border-radius:12px; box-shadow:var(--shadow-1); border:1px solid rgba(2,6,23,0.04);
+    }
+
+    /* Contact form */
+    .form-card{ background:#fff; padding:20px; border-radius:12px; box-shadow:var(--shadow-1); }
+    .form-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
+    .form-grid .row{ display:flex; gap:12px; }
+    input,textarea{
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(15,23,42,0.06);
+      font-size:14px; color:#0f172a; resize:vertical; background: #fff;
+    }
+    label{ font-size:13px; color:var(--muted); margin-bottom:6px; display:block; font-weight:600; }
+
+    .socials{ display:flex; gap:18px; justify-content:center; margin-top:14px; }
+    .socials a{ display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:10px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.08) }
+    .socials a:hover{ transform:translateY(-3px); opacity:0.95 }
+
+    /* Footer */
+    footer{ background:#0b1220; color:#cbd5e1; padding:24px 0; text-align:center; }
+
+    /* Mobile nav show */
+    .mobile-only{ display:none; }
+    @media(max-width:719px){
+      .nav-links{ display:none; }
+      .mobile-btn{ display:inline-flex; }
+      .mobile-only{ display:block; }
+      .cards{ grid-template-columns:1fr; }
+    }
+
+    /* Small utilities */
+    .muted{ color:var(--muted) }
+    .pill{ display:inline-block; padding:7px 12px; border-radius:999px; background:#f1f5f9; color:#0f172a; font-weight:700; font-size:13px }
+    .feedback{ background:#fff; padding:16px; border-radius:12px; box-shadow:var(--shadow-1); color:#0f172a }
+
+    /* Accessible focus */
+    a:focus, button:focus, input:focus, textarea:focus{ outline:3px solid rgba(37,99,235,0.18); outline-offset:3px; border-color:var(--primary) }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav" role="navigation" aria-label="Navegação principal">
+      <div class="brand">Marcelo Cardozo</div>
+
+      <nav class="nav-links" aria-label="Links do site">
+        <a href="#sobre">Sobre</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#formacao">Formação</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <button class="mobile-btn" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" title="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="mobile-only" style="display:none; padding:12px 16px; border-top:1px solid rgba(2,6,23,0.04); background:#fff;">
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <a href="#sobre">Sobre</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#formacao">Formação</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Marcelo Gonçalves Cardozo</h1>
+        <p>Desenvolvimento Web — foco em Engenharia de Software. HTML, CSS básico e JavaScript. Buscando minha primeira oportunidade.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contato"><i class="fas fa-envelope"></i> Entrar em Contato</a>
+          <a class="btn btn-outline" href="URL_SEU_GITHUB_AQUI" target="_blank" rel="noreferrer"><i class="fab fa-github"></i> Meu Código</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre">
+      <div class="container about">
+        <div class="profile-photo" aria-hidden="true">
+          <img src="https://picsum.photos/400/400?random=1" alt="Foto de Marcelo Gonçalves Cardozo">
+        </div>
+
+        <div>
+          <div class="card">
+            <h2 class="section-title" style="text-align:left; margin-bottom:6px;">Sobre Mim</h2>
+            <p class="muted" style="margin-bottom:12px;">👋 Olá — Sou Marcelo Gonçalves Cardozo, estudante do SENAC em Desenvolvimento Web. Tenho interesse em Engenharia de Software e estou desenvolvendo habilidades práticas em front-end e lógica para back-end.</p>
+
+            <p style="margin-bottom:12px;">Atualmente trabalho para consolidar conhecimentos em <strong>HTML, CSS (básico) e JavaScript</strong>. Estou focado em aprimorar minhas habilidades para conquistar minha primeira oportunidade profissional e aplicar meus aprendizados em projetos reais.</p>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+              <span class="pill">Buscando estágio</span>
+              <span class="pill">Aprendizado contínuo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="habilidades" style="background:transparent;">
+      <div class="container">
+        <h2 class="section-title">Habilidades Técnicas</h2>
+        <p class="section-sub">Apresento aqui minhas habilidades atuais — honestas e claras sobre o nível.</p>
+
+        <div class="cards" style="margin-top:12px;">
+          <div class="skill">
+            <i class="fab fa-html5" aria-hidden="true"></i>
+            <div>
+              <h4>HTML5</h4>
+              <p>Estrutura semântica, uso correto de headings, listas, formulários e acessibilidade básica (aria).</p>
+            </div>
+          </div>
+
+          <div class="skill">
+            <i class="fas fa-paint-brush" aria-hidden="true"></i>
+            <div>
+              <h4>CSS (básico)</h4>
+              <p>Layout responsivo com flexbox e grid, estilização limpa, tipografia e uso de variáveis. Não utilizo frameworks CSS no momento.</p>
+            </div>
+          </div>
+
+          <div class="skill">
+            <i class="fab fa-js-square" aria-hidden="true"></i>
+            <div>
+              <h4>JavaScript (básico)</h4>
+              <p>DOM, eventos, fetch básico. Buscando aprofundar lógica assíncrona e padrões de código.</p>
+            </div>
+          </div>
+
+          <div class="skill">
+            <i class="fab fa-python" aria-hidden="true"></i>
+            <div>
+              <h4>Python (conceitos)</h4>
+              <p>Conhecimentos introdutórios em lógica e estruturas de dados; foco em consolidar para backend.</p>
+            </div>
+          </div>
+
+          <div class="skill">
+            <i class="fas fa-database" aria-hidden="true"></i>
+            <div>
+              <h4>MySQL / SQL</h4>
+              <p>Modelagem básica, operações CRUD e consultas simples; em evolução contínua.</p>
+            </div>
+          </div>
+
+          <div class="skill">
+            <i class="fas fa-code-branch" aria-hidden="true"></i>
+            <div>
+              <h4>Git (básico)</h4>
+              <p>Commit, branch, push/pull. Importante para versionamento e colaboração.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAÇÃO -->
+    <section id="formacao">
+      <div class="container">
+        <h2 class="section-title">Formação Acadêmica</h2>
+        <p class="section-sub">Curso de Desenvolvimento Web — SENAC (em andamento)</p>
+
+        <div style="max-width:900px;margin:18px auto;">
+          <div class="formation-card">
+            <div style="display:flex;gap:16px;align-items:center;">
+              <div style="background:var(--primary);color:#fff;padding:14px;border-radius:12px;font-size:22px;">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div>
+                <h3 style="margin-bottom:4px;font-size:18px;font-weight:800;color:#0f172a">Desenvolvimento Web — SENAC</h3>
+                <div style="color:var(--muted);font-weight:700;margin-bottom:6px;">Status: Em andamento</div>
+                <p class="muted" style="margin-bottom:0">Conteúdos práticos em HTML, CSS, JavaScript, lógica e fundamentos de backend.</p>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;">
+              <h4 style="font-size:15px;margin-bottom:8px;font-weight:800">Principais temas estudados</h4>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span class="pill">Front-end</span>
+                <span class="pill">UX básico</span>
+                <span class="pill">Lógica & Algoritmos</span>
+                <span class="pill">Versionamento Git</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEEDBACK (recrutador exigente) -->
+    <section aria-label="Feedback do recrutador" style="background:transparent;">
+      <div class="container">
+        <h2 class="section-title">Feedback — o que melhorar (visão de recrutador exigente)</h2>
+        <p class="section-sub">Observações reais e acionáveis para aumentar suas chances.</p>
+
+        <div style="max-width:900px;margin:12px auto;display:grid;gap:12px;">
+          <div class="feedback">
+            <h4 style="margin-bottom:8px;font-weight:800">Pontos que podem reduzir sua chance agora</h4>
+            <ul style="margin-left:18px;color:var(--muted);">
+              <li><strong>Mencionar tecnologias que você não domina:</strong> tirar referências a frameworks que você não usa. (feito)</li>
+              <li><strong>Texto genérico:</strong> descreva um projeto curto com resultado claro (ex.: "site de portfólio com formulário funcionando").</li>
+              <li><strong>Falta de foco:</strong> prefira mostrar domínio em <em>1-2</em> áreas (ex.: HTML/CSS + um projeto JS) em vez de listar muitas tecnologias.</li>
+              <li><strong>Sem projetos óbvios:</strong> um repositório com 1 projeto bem documentado pesa mais que 5 incompletos.</li>
+            </ul>
+          </div>
+
+          <div class="feedback">
+            <h4 style="margin-bottom:8px;font-weight:800">Ações concretas e rápidas (faça já)</h4>
+            <ol style="margin-left:18px;color:var(--muted);">
+              <li><strong>Adicione 1 projeto completo:</strong> site com README no GitHub que mostre problema, solução e tecnologias usadas.</li>
+              <li><strong>Melhore a seção "Habilidades":</strong> seja honesto no nível (básico, intermediário) — já ajustado no site.</li>
+              <li><strong>Mostre disponibilidade:</strong> "Disponível para estágio/bolsa/projeto" e horários possíveis.</li>
+              <li><strong>Pratique pequenas entrevistas:</strong> responda em 1-2 frases o que você fez no projeto; prepare 3 frases sobre você.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" style="background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff;">
+      <div class="container">
+        <h2 class="section-title" style="color:#fff">Entre em Contato</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.9)">Quer me chamar para uma conversa, estágio ou projeto? Use o formulário abaixo.</p>
+
+        <div style="max-width:760px;margin:18px auto;">
+          <div class="form-card" style="background:#fff;color:#0f172a;">
+            <form id="contactForm" class="form-grid" onsubmit="return handleSubmit(event)">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div>
+                  <label for="name">Nome</label>
+                  <input id="name" type="text" placeholder="Seu nome completo" required>
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" type="email" placeholder="seu@email.com" required>
+                </div>
+              </div>
+
+              <div>
+                <label for="subject">Assunto</label>
+                <input id="subject" type="text" placeholder="Oportunidade de estágio ou projeto">
+              </div>
+
+              <div>
+                <label for="message">Mensagem</label>
+                <textarea id="message" rows="5" placeholder="Gostaria de falar sobre..." required></textarea>
+              </div>
+
+              <div>
+                <button type="submit" class="btn" style="background:var(--primary);color:#fff;border-radius:10px;padding:10px 14px;border:0;font-weight:800;">
+                  <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div style="text-align:center;margin-top:14px;color:#fff;">
+            <div style="font-weight:700;margin-bottom:8px;">Ou conecte-se profissionalmente</div>
+            <div class="socials" style="justify-content:center;margin-top:8px;">
+              <a href="URL_SEU_LINKEDIN_AQUI" target="_blank" rel="noreferrer" style="background:transparent;">
+                <i class="fab fa-linkedin" style="font-size:20px;color:#fff"></i>
+              </a>
+              <a href="URL_SEU_GITHUB_AQUI" target="_blank" rel="noreferrer" style="background:transparent;">
+                <i class="fab fa-github" style="font-size:20px;color:#fff"></i>
+              </a>
+              <a href="URL_SEU_INSTAGRAM_AQUI" target="_blank" rel="noreferrer" style="background:transparent;">
+                <i class="fab fa-instagram" style="font-size:20px;color:#fff"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="max-width:900px;margin:0 auto;">
+        <div style="padding:14px 0;">
+          <div style="font-weight:800;color:#fff;font-size:18px;">Marcelo Gonçalves Cardozo</div>
+          <div style="color:rgba(255,255,255,0.8);margin-top:6px;">Desenvolvimento Web — em busca da primeira oportunidade</div>
+          <div style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:8px;">&copy; 2025 Marcelo Cardozo. Todos os direitos reservados.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle && menuToggle.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      menuToggle.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const href = this.getAttribute('href');
+        if(href.startsWith('#')){
+          const el = document.querySelector(href);
+          if(el){
+            e.preventDefault();
+            el.scrollIntoView({behavior:'smooth', block:'start'});
+            if(window.innerWidth < 720) mobileMenu.style.display = 'none';
+          }
+        }
+      })
+    });
+
+    // Simple form handler (local only)
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if(!name || !email){ alert('Preencha nome e email.'); return false; }
+      // Aqui você pode conectar um serviço real (Formspree, Netlify Forms, Google Sheets, etc.)
+      alert('Mensagem enviada! Obrigado pelo contato, responderei em breve.');
+      e.target.reset();
+      return false;
+    }
+  </script>
+</body>
+</html>
